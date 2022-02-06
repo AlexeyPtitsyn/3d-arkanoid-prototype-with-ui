@@ -1,4 +1,11 @@
 # 3d arkanoid prototype
+
+Actually, this is a fork of [my 3d arkanoid prototype](https://github.com/AlexeyPtitsyn/3d-arkanoid-prototype), with added UI.
+
+
+
+Original description:
+
 A two-player 3D arkanoid, written in C# (with UNITY). The game don't use Unity physics, hovewer, it contains rigidbody components to detect collisions.
 
 Since this is a prototype, it will not include models, sounds, textures and so on.
