@@ -8,9 +8,13 @@ using Structs;
 
 namespace Controllers
 {
+    public delegate void LifeUpdate(int lives);
+
     [RequireComponent(typeof(PlayerController))]
     public class GameManager : MonoBehaviour
     {
+        public event LifeUpdate OnLifeUpdate;
+
         private PlayerController _playerController;
 
         [SerializeField, Tooltip("Wire up the ball here")]
@@ -62,6 +66,8 @@ namespace Controllers
                 GameOver();
             }
             InitLevel();
+
+            OnLifeUpdate?.Invoke(_lives);
         }
 
         /**
@@ -182,6 +188,8 @@ namespace Controllers
             _hitCurrentAcceleration = 1f;
 
             _lives--;
+            OnLifeUpdate?.Invoke(_lives);
+
             if(_lives <= 0)
             {
                 GameOver();
