@@ -9,20 +9,28 @@ namespace Controllers
 {
     public class HUDController : MonoBehaviour
     {
-        private int _display;
-
         public GameObject TextObject;
 
         private Text _textComponent;
 
-        private void Awake()
+        /**
+         * <summary>Set active display.</summary>
+         * <param name="display">Display to select.</param>
+         */
+        public void SetDisplay(int display)
         {
-            _display = GameObject.Find("Player2Camera").GetComponent<Camera>().targetDisplay;
-            GetComponent<Canvas>().targetDisplay = _display;
+            GetComponent<Canvas>().targetDisplay = display;
+        }
 
+        /**
+         * <summary>Hang events for gamemanager.</summary>
+         * <params name="manager">Selected game manager.</params>
+         */
+        public void HangEvents(GameManager manager)
+        {
             _textComponent = TextObject.GetComponent<Text>();
 
-            GameObject.Find("GameManager").GetComponent<GameManager>().OnLifeUpdate += (int lives) =>
+            manager.OnLifeUpdate += (int lives) =>
             {
                 if (lives <= 2)
                 {

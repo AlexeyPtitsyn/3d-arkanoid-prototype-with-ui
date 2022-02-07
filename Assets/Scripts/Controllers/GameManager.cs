@@ -15,6 +15,9 @@ namespace Controllers
     {
         public event LifeUpdate OnLifeUpdate;
 
+        [SerializeField, Tooltip("Wire up HUD dummy here...")]
+        public GameObject HUDPrefab;
+
         private PlayerController _playerController;
 
         [SerializeField, Tooltip("Wire up the ball here")]
@@ -67,7 +70,23 @@ namespace Controllers
             }
             InitLevel();
 
+            InitHUDs();
+
             OnLifeUpdate?.Invoke(_lives);
+        }
+
+        /**
+         * <summary>Instantiate HUD prefabs and set them.</summary>
+         */
+        public void InitHUDs()
+        {
+            var instance1 = Instantiate(HUDPrefab);
+            instance1.GetComponent<HUDController>().SetDisplay(0);
+            instance1.GetComponent<HUDController>().HangEvents(this);
+
+            var instance2 = Instantiate(HUDPrefab);
+            instance2.GetComponent<HUDController>().SetDisplay(1);
+            instance2.GetComponent<HUDController>().HangEvents(this);
         }
 
         /**

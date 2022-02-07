@@ -1024,6 +1024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f732d91da35469fb57b763fa0eb39a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HUDPrefab: {fileID: 757951923665380743, guid: 546e076c4277742edbc8d8064ad66a9e,
+    type: 3}
   Ball: {fileID: 2089342747}
   _initialBallOwner: 0
   _hitAcceleration: 1
