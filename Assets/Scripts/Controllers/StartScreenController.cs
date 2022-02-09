@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Main menu screen controller.
+// Copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,10 +10,13 @@ namespace Controllers
     public class StartScreenController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _btnExitGame;
+        private GameObject _gameManager;
 
         [SerializeField]
         private GameObject _btnNewGame;
+
+        [SerializeField]
+        private GameObject _btnExitGame;
 
         [SerializeField]
         private GameObject _textArkanoid;
@@ -39,8 +44,8 @@ namespace Controllers
             StartCoroutine(TextArkanoidMove());
             StartCoroutine(Text3dMove());
 
-            _btnNewGame.GetComponent<Button>().onClick.AddListener(OnNewGame);
-            _btnExitGame.GetComponent<Button>().onClick.AddListener(OnExitGame);
+            _btnNewGame.GetComponent<Button>().onClick.AddListener(() => { OnNewGame(); });
+            _btnExitGame.GetComponent<Button>().onClick.AddListener(() => { OnExitGame(); });
         }
 
         private void DoMoveText(GameObject obj, ref float from, ref float to, ref bool isMoveRight)
@@ -89,12 +94,20 @@ namespace Controllers
 
         private void OnExitGame()
         {
-            Debug.Log("On exit.");
+            if(Application.isEditor)
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+                return;
+            }
+
+            Application.Quit();
         }
 
         private void OnNewGame()
         {
-            Debug.Log("On new game.");
+            _gameManager.GetComponent<GameManager>().Run();
+
+            Destroy(this.gameObject);
         }
     }
 

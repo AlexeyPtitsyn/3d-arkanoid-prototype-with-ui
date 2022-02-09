@@ -52,7 +52,7 @@ namespace Controllers
         private List<GameObject> _levels = new List<GameObject>();
         private int? _levelNumber;
 
-        private void Awake()
+        public void Run()
         {
             _playerController = GetComponent<PlayerController>();
             _playerController.BallOwner = _initialBallOwner;
