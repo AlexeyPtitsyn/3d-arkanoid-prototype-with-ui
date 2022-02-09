@@ -50,9 +50,9 @@ namespace Controllers
 
         private void DoMoveText(GameObject obj, ref float from, ref float to, ref bool isMoveRight)
         {
+            var comp = obj.GetComponent<RectTransform>();
             if (isMoveRight)
             {
-                var comp = obj.GetComponent<RectTransform>();
                 comp.position += new Vector3(1, 0, 0) * Time.deltaTime * _textMoveSpeed;
 
                 if (comp.position.x >= to)
@@ -62,7 +62,6 @@ namespace Controllers
             }
             else
             {
-                var comp = obj.GetComponent<RectTransform>();
                 comp.position += new Vector3(-1, 0, 0) * Time.deltaTime * _textMoveSpeed;
 
                 if (comp.position.x <= from)
