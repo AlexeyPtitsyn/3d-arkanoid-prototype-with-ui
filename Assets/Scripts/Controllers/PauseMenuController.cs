@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Controllers
 {
@@ -14,5 +15,13 @@ namespace Controllers
 
         [SerializeField]
         private GameObject _restartLevelButton;
+
+        public GameManager gameManager;
+
+        private void Awake()
+        {
+            _continueButton.GetComponent<Button>().onClick.AddListener(() => { gameManager.OnContinueGame(); });
+            _quitButton.GetComponent<Button>().onClick.AddListener(() => { gameManager.OnExitGame();  });
+        }
     }
 }

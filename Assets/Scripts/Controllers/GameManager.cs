@@ -87,6 +87,22 @@ namespace Controllers
 
             Debug.Log("Pause menu called.");
             _pauseMenu = Instantiate(PauseMenuPrefab);
+            _pauseMenu.GetComponent<PauseMenuController>().gameManager = this;
+        }
+        public void OnContinueGame()
+        {
+            Destroy(_pauseMenu);
+        }
+
+        public void OnExitGame()
+        {
+            if (Application.isEditor)
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+                return;
+            }
+
+            Application.Quit();
         }
 
         /**
