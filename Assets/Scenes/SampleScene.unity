@@ -1026,6 +1026,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HUDPrefab: {fileID: 757951923665380743, guid: 546e076c4277742edbc8d8064ad66a9e,
     type: 3}
+  PauseMenuPrefab: {fileID: 2011336277966337318, guid: 37611691f8373426b92c01722de1924a,
+    type: 3}
   Ball: {fileID: 2089342747}
   _initialBallOwner: 0
   _hitAcceleration: 1

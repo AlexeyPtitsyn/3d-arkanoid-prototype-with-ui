@@ -18,6 +18,9 @@ namespace Controllers
         [SerializeField, Tooltip("Wire up HUD dummy here...")]
         public GameObject HUDPrefab;
 
+        [SerializeField]
+        public GameObject PauseMenuPrefab;
+
         private PlayerController _playerController;
 
         [SerializeField, Tooltip("Wire up the ball here")]
@@ -83,6 +86,7 @@ namespace Controllers
             if (_pauseMenu != null) return;
 
             Debug.Log("Pause menu called.");
+            _pauseMenu = Instantiate(PauseMenuPrefab);
         }
 
         /**
