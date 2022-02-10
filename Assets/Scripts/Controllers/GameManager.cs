@@ -52,12 +52,15 @@ namespace Controllers
         private List<GameObject> _levels = new List<GameObject>();
         private int? _levelNumber;
 
+        private GameObject _pauseMenu;
+
         public void Run()
         {
             _playerController = GetComponent<PlayerController>();
             _playerController.BallOwner = _initialBallOwner;
             _playerController.OnAlignBall += OnAlignBall;
             _playerController.OnLaunchBall += OnLaunchBall;
+            _playerController.OnPauseMenu += OnPauseMenu;
 
             Ball.OnCollision += OnBallCollision;
             Ball.OnTrigger += OnBallTrigger;
@@ -73,6 +76,13 @@ namespace Controllers
             InitHUDs();
 
             OnLifeUpdate?.Invoke(_lives);
+        }
+
+        private void OnPauseMenu()
+        {
+            if (_pauseMenu != null) return;
+
+            Debug.Log("Pause menu called.");
         }
 
         /**

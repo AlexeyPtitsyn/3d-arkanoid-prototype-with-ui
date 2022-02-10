@@ -8,6 +8,7 @@ using Controllers;
 
 namespace Player
 {
+    public delegate void PauseMenu();
     public delegate void LaunchBall();
     public delegate void AlignBall(Vector3 coords);
 
@@ -15,6 +16,7 @@ namespace Player
     {
         public event LaunchBall OnLaunchBall;
         public event AlignBall OnAlignBall;
+        public event PauseMenu OnPauseMenu;
 
         [SerializeField, Tooltip("Attach camera 1 here")]
         private Camera _player1Camera;
@@ -45,6 +47,9 @@ namespace Player
             _controls = new PlayerControls();
 
             _controls.GameMap.LaunchBall.performed += OnLaunchButtonPress;
+            _controls.GameMap.PauseMenu.performed += (CallbackContext context) => {
+                OnPauseMenu?.Invoke();
+            };
 
             if(_player1Camera is null || _player2Camera is null)
             {

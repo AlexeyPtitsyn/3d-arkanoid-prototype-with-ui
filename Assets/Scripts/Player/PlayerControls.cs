@@ -43,6 +43,14 @@ namespace Player
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8b6e109-201e-4c7d-8c07-35b64d60310c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -166,6 +174,17 @@ namespace Player
                     ""action"": ""LaunchBall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3f33cd5-405a-4412-b736-1a360992a6d5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -177,6 +196,7 @@ namespace Player
             m_GameMap_Player1Move = m_GameMap.FindAction("Player1Move", throwIfNotFound: true);
             m_GameMap_Player2Move = m_GameMap.FindAction("Player2Move", throwIfNotFound: true);
             m_GameMap_LaunchBall = m_GameMap.FindAction("LaunchBall", throwIfNotFound: true);
+            m_GameMap_PauseMenu = m_GameMap.FindAction("PauseMenu", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -229,6 +249,7 @@ namespace Player
         private readonly InputAction m_GameMap_Player1Move;
         private readonly InputAction m_GameMap_Player2Move;
         private readonly InputAction m_GameMap_LaunchBall;
+        private readonly InputAction m_GameMap_PauseMenu;
         public struct GameMapActions
         {
             private @PlayerControls m_Wrapper;
@@ -236,6 +257,7 @@ namespace Player
             public InputAction @Player1Move => m_Wrapper.m_GameMap_Player1Move;
             public InputAction @Player2Move => m_Wrapper.m_GameMap_Player2Move;
             public InputAction @LaunchBall => m_Wrapper.m_GameMap_LaunchBall;
+            public InputAction @PauseMenu => m_Wrapper.m_GameMap_PauseMenu;
             public InputActionMap Get() { return m_Wrapper.m_GameMap; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -254,6 +276,9 @@ namespace Player
                     @LaunchBall.started -= m_Wrapper.m_GameMapActionsCallbackInterface.OnLaunchBall;
                     @LaunchBall.performed -= m_Wrapper.m_GameMapActionsCallbackInterface.OnLaunchBall;
                     @LaunchBall.canceled -= m_Wrapper.m_GameMapActionsCallbackInterface.OnLaunchBall;
+                    @PauseMenu.started -= m_Wrapper.m_GameMapActionsCallbackInterface.OnPauseMenu;
+                    @PauseMenu.performed -= m_Wrapper.m_GameMapActionsCallbackInterface.OnPauseMenu;
+                    @PauseMenu.canceled -= m_Wrapper.m_GameMapActionsCallbackInterface.OnPauseMenu;
                 }
                 m_Wrapper.m_GameMapActionsCallbackInterface = instance;
                 if (instance != null)
@@ -267,6 +292,9 @@ namespace Player
                     @LaunchBall.started += instance.OnLaunchBall;
                     @LaunchBall.performed += instance.OnLaunchBall;
                     @LaunchBall.canceled += instance.OnLaunchBall;
+                    @PauseMenu.started += instance.OnPauseMenu;
+                    @PauseMenu.performed += instance.OnPauseMenu;
+                    @PauseMenu.canceled += instance.OnPauseMenu;
                 }
             }
         }
@@ -276,6 +304,7 @@ namespace Player
             void OnPlayer1Move(InputAction.CallbackContext context);
             void OnPlayer2Move(InputAction.CallbackContext context);
             void OnLaunchBall(InputAction.CallbackContext context);
+            void OnPauseMenu(InputAction.CallbackContext context);
         }
     }
 }
