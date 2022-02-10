@@ -57,6 +57,8 @@ namespace Controllers
 
         private GameObject _pauseMenu;
 
+        public bool IsGamePaused = false;
+
         public void Run()
         {
             _playerController = GetComponent<PlayerController>();
@@ -88,10 +90,13 @@ namespace Controllers
             Debug.Log("Pause menu called.");
             _pauseMenu = Instantiate(PauseMenuPrefab);
             _pauseMenu.GetComponent<PauseMenuController>().gameManager = this;
+
+            IsGamePaused = true;
         }
         public void OnContinueGame()
         {
             Destroy(_pauseMenu);
+            IsGamePaused = false;
         }
 
         public void OnExitGame()
@@ -326,6 +331,12 @@ namespace Controllers
         {
             while(true)
             {
+                if (IsGamePaused)
+                {
+                    yield return null;
+                    continue;
+                }
+
                 if (_hitCurrentAcceleration >= _hitAccelerationLimit)
                 {
                     _hitCurrentAcceleration = _hitAccelerationLimit;

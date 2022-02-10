@@ -113,6 +113,8 @@ namespace Player
          */
         private void MoveCameras()
         {
+            if (_gameManager.IsGamePaused) return;
+
             var directionPlayer1 = _controls.GameMap.Player1Move.ReadValue<Vector2>();
             if (directionPlayer1 != Vector2.zero)
             {
