@@ -20,6 +20,10 @@ namespace Controllers
 
         private void Awake()
         {
+            _restartLevelButton.GetComponent<Button>().onClick.AddListener(() => {
+                gameManager.InitLevel();
+                gameManager.OnContinueGame();
+            });
             _continueButton.GetComponent<Button>().onClick.AddListener(() => { gameManager.OnContinueGame(); });
             _quitButton.GetComponent<Button>().onClick.AddListener(() => { gameManager.OnExitGame();  });
         }

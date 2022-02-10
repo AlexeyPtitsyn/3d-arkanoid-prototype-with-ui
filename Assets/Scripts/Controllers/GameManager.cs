@@ -180,7 +180,7 @@ namespace Controllers
         /**
          * <summary>Load one level. Count blocks. Init ball.</summary>
          */
-        void InitLevel()
+        public void InitLevel()
         {
             MoveAwayAllLevels();
 
@@ -205,6 +205,7 @@ namespace Controllers
                     {
                         _blocksCount++;
                         blocks.Add(block.gameObject);
+                        block.gameObject.SetActive(true);
                     }
                 }
             }
@@ -287,7 +288,8 @@ namespace Controllers
             {
                 _hitCurrentAcceleration += _hitAcceleration;
 
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
+                //Destroy(collision.gameObject);
                 _blocksCount--;
                 if(_blocksCount <= 0)
                 {
