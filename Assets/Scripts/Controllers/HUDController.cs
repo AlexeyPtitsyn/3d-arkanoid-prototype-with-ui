@@ -1,7 +1,5 @@
 ﻿// HUD Controller.
 // Copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 

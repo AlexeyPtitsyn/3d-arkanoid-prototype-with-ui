@@ -18,7 +18,7 @@ namespace Controllers
         [SerializeField, Tooltip("Wire up HUD dummy here...")]
         public GameObject HUDPrefab;
 
-        [SerializeField]
+        [SerializeField, Tooltip("Connect pause menu prefab here.")]
         public GameObject PauseMenuPrefab;
 
         private PlayerController _playerController;
@@ -59,6 +59,9 @@ namespace Controllers
 
         public bool IsGamePaused = false;
 
+        /**
+         * <summary>Main method to start game</summary>
+         */
         public void Run()
         {
             _playerController = GetComponent<PlayerController>();
@@ -83,6 +86,9 @@ namespace Controllers
             OnLifeUpdate?.Invoke(_lives);
         }
 
+        /**
+         * <summary>Fired when pause mode button clicked.</summary>
+         */
         private void OnPauseMenu()
         {
             if (_pauseMenu != null) return;
@@ -93,12 +99,19 @@ namespace Controllers
 
             IsGamePaused = true;
         }
+
+        /**
+         * <summary>Fired when pause menu should be closed.</summary>
+         */
         public void OnContinueGame()
         {
             Destroy(_pauseMenu);
             IsGamePaused = false;
         }
 
+        /**
+         * <summary>Fired when exiting from the pause menu.</summary>
+         */
         public void OnExitGame()
         {
             if (Application.isEditor)

@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// Pause menu controller.
+// Copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +18,9 @@ namespace Controllers
 
         public GameManager gameManager;
 
+        /**
+         * <summary>Awake and hang events.</summary>
+         */
         private void Awake()
         {
             _restartLevelButton.GetComponent<Button>().onClick.AddListener(() => {

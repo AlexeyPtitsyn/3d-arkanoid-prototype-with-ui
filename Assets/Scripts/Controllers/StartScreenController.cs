@@ -1,7 +1,6 @@
 ﻿// Main menu screen controller.
 // Copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,6 +47,13 @@ namespace Controllers
             _btnExitGame.GetComponent<Button>().onClick.AddListener(() => { OnExitGame(); });
         }
 
+        /**
+         * <summary>Move texts(anything) by refs.</summary>
+         * <param name="obj">Object to move.</param>
+         * <param name="from">From x coord.</param>
+         * <param name="to">To x coord.</param>
+         * <param name="isMoveRight">is moving right boolean.</param>
+         */
         private void DoMoveText(GameObject obj, ref float from, ref float to, ref bool isMoveRight)
         {
             var comp = obj.GetComponent<RectTransform>();
@@ -71,6 +77,9 @@ namespace Controllers
             }
         }
 
+        /**
+         * <summary>Move "Arkanoid text" coroutine.</summary>
+         */
         IEnumerator TextArkanoidMove()
         {
             while(true)
@@ -81,6 +90,9 @@ namespace Controllers
             }
         }
 
+        /**
+         * <summary>Move text "3d" coroutine.</summary>
+         */
         IEnumerator Text3dMove()
         {
             while(true)
@@ -91,6 +103,9 @@ namespace Controllers
             }
         }
 
+        /**
+         * <summary>Fired when exit button pressed.</summary>
+         */
         private void OnExitGame()
         {
             if(Application.isEditor)
@@ -102,6 +117,9 @@ namespace Controllers
             Application.Quit();
         }
 
+        /**
+         * <summary>Fired when new game button pressed.</summary>
+         */
         private void OnNewGame()
         {
             _gameManager.GetComponent<GameManager>().Run();
